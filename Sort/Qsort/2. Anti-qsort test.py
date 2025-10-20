@@ -28,13 +28,41 @@
 
 
 
-arr = list(range(10))
+arr = list(range(1, 8))
 print(arr)
 
 left = 0
 right = len(arr)-1
-        
 
-def anti_qsort(arr):
-    if len(arr) > 1:
-        x = arr[(left + right) // 2]
+ind_av_pos = (left + right) // 2
+
+x = arr[(left + right) // 2]
+print("Число ->", x, "Его индекс ->", ind_av_pos)
+
+arr[ind_av_pos] = arr[-1]
+
+print("Новый массив", arr)
+
+
+      
+
+def anti_qsort(n):
+    a = [0] * n
+    nums = list(range(1, n + 1))
+    pos = 0  # текущая позиция в nums
+
+    def build(l, r):
+        nonlocal pos
+        if l > r:
+            return
+        m = (l + r) // 2
+        a[m] = nums[pos]
+        pos += 1
+        build(l, m - 1)
+        build(m + 1, r)
+
+    build(0, n - 1)
+    return a
+
+n = int(input())
+print(*anti_qsort(n))
