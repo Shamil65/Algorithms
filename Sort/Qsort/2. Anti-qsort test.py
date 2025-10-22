@@ -30,28 +30,19 @@
 
 def anti_qsort(n):
     a = [0] * n
-    print("a: ", a)
     nums = list(range(1, n + 1))
     pos = 0  # текущая позиция в nums
-    print("nums: ", nums)
-    print("pos: ", pos)
-
     def build(l, r):
-        print("l, r: ", l, r)
         nonlocal pos
         if l > r:
             return
         m = (l + r) // 2
-        print("m: ", m)
         a[m] = nums[pos]
-        print("nums[pos]: ", nums[pos])
         pos += 1
         build(l, m - 1)
         build(m + 1, r)
-
     build(0, n - 1)
     return a
-
 n = int(input())
 print(*anti_qsort(n))
 
