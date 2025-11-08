@@ -1,9 +1,15 @@
 n, k = map(int, input().split())
 
-for i in range(k):
-    n_str = str(n)
-    last_number = int(n_str[-1])
-
-    n += last_number
+while k > 0:
+    x = n % 10
+    if x == 0:
+        break
+    if x == 2:
+        n += (k // 4) * 20
+        k %= 4
+        if k == 0:
+            break
+    n += x
+    k -= 1
 
 print(n)
