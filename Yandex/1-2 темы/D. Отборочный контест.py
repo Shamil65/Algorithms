@@ -1,23 +1,23 @@
 n, k = map(int, input().split())
-a = list(map(int, input().split()))
+themes = list(map(int, input().split()))
 
-unique_seen = set()
-result = []
+# Считаем количество задач по каждой теме
+from collections import Counter
+count = Counter(themes)
 
-# Крок 1: собрать уникальные темы по порядку появления
-for x in a:
-    if x not in unique_seen:
-        unique_seen.add(x)
-        result.append(x)
-        if len(result) == k:
-            break
+# Сначала выбираем по одной задаче из каждой темы
+selected = []
+for theme in count:
+    selected.append(theme)
+    count[theme] -= 1
+    if len(selected) == k:
+        break
 
-# Крок 2: дополняем повторяющимися темами до k
-if len(result) < k:
-    for x in a:
-        if x in unique_seen:
-            result.append(x)
-            if len(result) == k:
-                break
+# Если ещё не набрали k задач, добавляем оставшиеся из тех, где больше одной задачи
+if len(selected) < k:
+    for theme in count:
+        while count[theme] > 0 and len(selected) < k:
+            selected.append(theme)
+            count[theme] -= 1
 
-print(*result[:k])
+print(*selected)
