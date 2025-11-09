@@ -1,37 +1,29 @@
-from collections import Counter
+n, m = map(int, input().split())
+field = [input().strip() for _ in range(n)]
 
-n, k = map(int, input().split())
+# 4 направления: (dx, dy)
+directions = [
+    (0, 1),   # вправо
+    (1, 0),   # вниз
+    (1, 1),   # диагональ вниз-вправо
+    (1, -1)   # диагональ вниз-влево
+]
 
-my_lists = []
-
-for _ in range(n):
-    my_lists.append(list(map(int, input().split())))
-
-# === По горизонтали ===
-for my_arr in my_lists:
-    O_count = my_arr.count(1)
-    X_count = my_arr.count(2)
-    if X_count >= 5 or O_count >= 5:
-        print("Yes")
-        break
-
-# === По вертикали ===
-# k - это наша ширина
-X_count = 0
-O_count = 0
-for i in range(k):
-    for my_arr in my_lists:
-        if my_arr[i] == 1:
-            X_count += 1
-        else:    
-            O_count += 1
-        if X_count >= 5 or O_count >= 5:
-            print("yes")
-            break
-    X_count = 0
-    O_count = 0
-
-
-
-
-print(my_lists)
+for i in range(n):
+    for j in range(m):
+        if field[i][j] in ('X', 'O'):
+            sym = field[i][j]
+            for dx, dy in directions:
+                count = 1
+                x, y = i, j
+                for k in range(4):  # нужно ещё 4 клетки (всего 5)
+                    x += dx
+                    y += dy
+                    if 0 <= x < n and 0 <= y < m and field[x][y] == sym:
+                        count += 1
+                    else:
+                        break
+                if count == 5:
+                    print("Yes")
+                    exit()
+print("No")
