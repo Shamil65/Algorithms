@@ -9,7 +9,9 @@ count = Counter(themes)
 selected = []
 for theme in count:
     selected.append(theme)
+    
     count[theme] -= 1
+    print("count[theme]: ", count[theme], "theme ", theme, "count ", count)
     if len(selected) == k:
         break
 
