@@ -1,29 +1,58 @@
-n, m = map(int, input().split())
-field = [input().strip() for _ in range(n)]
+import sys
 
-# 4 направления: (dx, dy)
-directions = [
-    (0, 1),   # вправо
-    (1, 0),   # вниз
-    (1, 1),   # диагональ вниз-вправо
-    (1, -1)   # диагональ вниз-влево
-]
+def main():
+    data = sys.stdin.read().splitlines()
+    if not data:
+        print("No")
+        return
 
-for i in range(n):
-    for j in range(m):
-        if field[i][j] in ('X', 'O'):
-            sym = field[i][j]
+    # Парсим первую строку с n и m — с защитой от ошибок формата
+    first_parts = data[0].strip().split()
+    if len(first_parts) < 2:
+        print("No")
+        return
+    try:
+        n = int(first_parts[0])
+        m = int(first_parts[1])
+    except:
+        print("No")
+        return
+
+    # Считываем поле — если строк меньше, дополним точками
+    field = []
+    for i in range(n):
+        if i + 1 < len(data):
+            row = data[i+1].rstrip('\n')
+        else:
+            row = ""
+        # если строка длиннее m, обрезаем; если короче — дополняем точками
+        if len(row) < m:
+            row = row.ljust(m, '.')
+        elif len(row) > m:
+            row = row[:m]
+        field.append(row)
+
+    # направления: вправо, вниз, диагональ вниз-вправо, диагональ вниз-влево
+    directions = [(0,1),(1,0),(1,1),(1,-1)]
+    for i in range(n):
+        for j in range(m):
+            ch = field[i][j]
+            if ch not in ('X','O'):
+                continue
             for dx, dy in directions:
-                count = 1
                 x, y = i, j
-                for k in range(4):  # нужно ещё 4 клетки (всего 5)
+                cnt = 1
+                for _ in range(4):  # ещё 4 шагa для общей длины 5
                     x += dx
                     y += dy
-                    if 0 <= x < n and 0 <= y < m and field[x][y] == sym:
-                        count += 1
+                    if 0 <= x < n and 0 <= y < m and field[x][y] == ch:
+                        cnt += 1
                     else:
                         break
-                if count == 5:
+                if cnt == 5:
                     print("Yes")
-                    exit()
-print("No")
+                    return
+    print("No")
+
+if __name__ == "__main__":
+    main()
