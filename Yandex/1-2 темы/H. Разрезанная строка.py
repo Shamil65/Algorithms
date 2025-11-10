@@ -22,4 +22,6 @@ for i in all_strings:
     numbers.append(pos)
     print(pos)
 
-print(numbers)
+order = sorted(range(1, len(numbers) + 1), key=lambda i: numbers[i - 1])
+
+print(*order)
