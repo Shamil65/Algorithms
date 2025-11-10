@@ -19,7 +19,7 @@ numbers = []
 
 for i in all_strings:
     pos = total_string.find(i)
-
+    numbers.append(pos)
     print(pos)
 
-print(all_strings)
+print(numbers)
