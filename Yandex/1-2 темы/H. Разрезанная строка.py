@@ -15,8 +15,11 @@ len_split_string = len_total_string/m
 
 all_strings = [input().strip() for _ in range(m)]
 
+numbers = []
+
 for i in all_strings:
-    pos = all_strings.find(i)
+    pos = total_string.find(i)
+
     print(pos)
 
 print(all_strings)
