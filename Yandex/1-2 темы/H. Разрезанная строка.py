@@ -13,14 +13,16 @@ def main():
         ppmi = pos_map.setdefault(sub, [])
         ppmi.append(i)
 
-    print(pos_map)
-
     assigned = []
+    print(pos_map)
     # Для каждого куска из входных данных находим его позицию
     for idx, piece in enumerate(pieces, start=1):
+        print(idx, piece)
+        print(pos_map[piece])
         pos = pos_map[piece].pop(0)  # достаем первую позицию
         assigned.append((pos, idx))
-
+        print("После", pos_map)
+    print("assigned", assigned)
     # Сортируем по позиции в исходной строке
     assigned.sort(key=lambda x: x[0])
     result = [str(idx) for _, idx in assigned]
