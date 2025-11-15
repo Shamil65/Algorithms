@@ -21,8 +21,8 @@ def main():
     # Сортируем по позиции в исходной строке
     assigned.sort(key=lambda x: x[0])
     result = [str(idx) for _, idx in assigned]
+    print(assigned)
 
     print(" ".join(result))
 
-if __name__ == "__main__":
-    main()
+main()
