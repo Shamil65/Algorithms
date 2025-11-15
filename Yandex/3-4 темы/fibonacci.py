@@ -8,3 +8,13 @@ def fib(n):
 # print(fib(6))
 
 #==== Динамическая версия с кэшированием ====
+def db_fib(n, db):
+    if dp[n] == -1:
+        return db_fib(n-1, db) + db_fib(n-2, db)
+    return dp[n]
+    
+
+n = int(input())
+dp = [-1] * (n+1)
+dp[0] = dp[1] = 1
+print(db_fib(n, dp))
