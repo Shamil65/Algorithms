@@ -6,3 +6,25 @@
 
 # Определить максимальное число монеток, которое соберёт черепашка
 
+def max_coins(grid):
+    n, m = len(grid), len(grid[0])
+    dp = [[0]*m for _ in range(n)]
+    
+    for i in range(n):
+        for j in range(m):
+            if i == 0 and j == 0:
+                dp[i][j] = grid[i][j]
+            else:
+                top = dp[i-1][j] if i > 0 else 0
+                left = dp[i][j-1] if j > 0 else 0
+                dp[i][j] = max(top, left) + grid[i][j]
+    
+    return dp[n-1][m-1]
+
+# Наш пример
+grid = [
+    [2, 4, 1],
+    [5, 1, 3],
+    [1, 2, 2]
+]
+print(max_coins(grid))  # Выведет 13
