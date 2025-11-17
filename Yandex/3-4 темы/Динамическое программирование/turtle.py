@@ -6,6 +6,7 @@
 
 # Определить максимальное число монеток, которое соберёт черепашка
 
+
 def max_coins(grid):
     n, m = len(grid), len(grid[0])
     dp = [[0]*m for _ in range(n)]
