@@ -58,7 +58,25 @@ class MinHeap():
             parent_index = self._parent(index)
 
     def sift_down(self, index):
-        pass
+        while True:
+            smallest = index
+
+            left = self._left(index)
+            right = self._right(index)
+
+            if left is not None and self.heap[left][0] < self.heap[smallest][0]:
+                smallest = left
+
+            if right is not None and self.heap[right][0] < self.heap[smallest][0]:
+                smallest = right
+
+
+            if smallest == index:
+                break
+
+            self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
+            index == smallest
+            
     
 
 # готово?
